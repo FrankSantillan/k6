@@ -1,0 +1,16 @@
+{
+  "name": "k6",
+  "version": "1.0.0",
+  "description": "A k6 project for performance testing APIs",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "k6 run ./scripts/stress_test.ts"
+  },
+  "devDependencies": {
+    "csv-parser": "^3.0.0",
+    "eslint": "^7.32.0",
+    "prettier": "^2.8.8"
+  },
+  "private": true
+}
