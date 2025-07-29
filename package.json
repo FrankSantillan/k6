@@ -5,12 +5,25 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "k6 run ./scripts/stress_test.ts"
+    "test": "k6 run --vus 10 --duration 30s ./src/scripts/reqres_API/performance_testing.ts",
+    "test:report": "mkdir -p ./src/reports/reqres && K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=./src/reports/reqres/performance-report.html k6 run --vus 10 --duration 30s ./src/scripts/reqres_API/performance_testing.ts",
+
+    "performance:testing": "k6 run ./src/scripts/reqres_API/performance_testing.ts",
+    "stress:testing": "k6 run src/scripts/reqres_API/stress_testing.ts",
+
+    "docker": "docker run --rm -i grafana/k6 run - stress_test.ts",
+    "k6:cloud:login": "k6 cloud login --token ee24e2ba4765a60a47764accd61f47ea025c3887349820dced4929592a220025",
+    "k6:cloud": "k6 cloud run ./src/scripts/reqres_API/performance_testing.ts"
   },
   "devDependencies": {
+    "@types/k6": "^1.1.1",
     "csv-parser": "^3.0.0",
     "eslint": "^7.32.0",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "typescript": "^5.8.3"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "k6": "^0.0.0"
+  }
 }
